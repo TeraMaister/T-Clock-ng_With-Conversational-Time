@@ -156,7 +156,7 @@ T-Clock-ng With Conversational Time
 
 
 ==========
-T-Clock-ng
+Original T-Clock-ng readme
 ==========
 [![build](https://github.com/Balls0fSteel/T-Clock-ng/actions/workflows/build.yml/badge.svg)](https://github.com/Balls0fSteel/T-Clock-ng/actions/workflows/build.yml)
 
