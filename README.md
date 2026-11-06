@@ -74,12 +74,14 @@ All original T-Clock-ng functionality and Windows 11 compatibility improvements 
 
 ## Conversational Time Formats
 
-This fork adds conversational time-format tokens that can be entered directly in T-Clock-ng's **Clock Text → Format** field. Use the tokens in uppercase and **without a percent sign**. They can be used on their own or combined with static text and other T-Clock format tokens.
+This fork adds six conversational time-format tokens that can be entered directly in T-Clock-ng's **Clock Text → Format** field. Enter tokens in uppercase and **without a percent sign**. They can be used on their own or combined with static text and other T-Clock format tokens.
 
-The English formats are:
+### Available tokens
 
 | Token | Language / format | Precision |
 |---|---|---|
+| `TRTIME` | Turkish | Exact minute |
+| `APPROXTRTIME` | Turkish | Rounded to nearest five minutes |
 | `UKENTIME` | British English | Exact minute |
 | `APPROXUKENTIME` | British English | Rounded to nearest five minutes |
 | `USENTIME` | American English | Exact minute |
@@ -87,7 +89,23 @@ The English formats are:
 | `ENTIME` | Alias for `UKENTIME` | Exact minute |
 | `APPROXENTIME` | Alias for `APPROXUKENTIME` | Rounded to nearest five minutes |
 
+### Turkish examples
+
+The Turkish tokens express time using everyday Turkish 12-hour phrasing. Before noon and after noon, the relevant day-period label is added where appropriate.
+
+| Actual time | `TRTIME` | `APPROXTRTIME` |
+|---|---|---|
+| 13:07 | öğleden sonra biri yedi geçiyor | öğleden sonra biri beş geçiyor |
+| 13:17 | öğleden sonra biri on yedi geçiyor | öğleden sonra biri çeyrek geçiyor |
+| 13:28 | öğleden sonra biri yirmi sekiz geçiyor | öğleden sonra bir buçuk |
+| 13:43 | öğleden sonra ikiye on yedi var | öğleden sonra ikiye çeyrek var |
+| 20:30 | akşam sekiz buçuk | akşam sekiz buçuk |
+
+`TRTIME` preserves the actual minute. `APPROXTRTIME` first rounds the time to the nearest five-minute increment; for example, 13:17 is treated as 13:15. On the first half of the hour, Turkish phrasing uses `geçiyor`; after half past, it expresses the remaining time to the next hour with `var`. At :30 it uses `buçuk`. Day-period labels are approximate defaults: gece, sabah, öğlen, öğleden sonra, and akşam.
+
 ### English examples
+
+The English tokens provide both American and British everyday time expressions. American English uses **after / till**, while British English uses **past / to**.
 
 | Actual time | `USENTIME` | `UKENTIME` |
 |---|---|---|
@@ -98,11 +116,11 @@ The English formats are:
 | 13:45 | quarter till two in the afternoon | quarter to two in the afternoon |
 | 13:55 | five till two in the afternoon | five to two in the afternoon |
 
-American English uses **after / till**, while British English uses **past / to**. Both use `o'clock` for exact hours, `noon` at exactly 12:00, and `midnight` at exactly 00:00. Minute values that are not multiples of five include the word `minute` or `minutes`; five-minute increments omit it. Day-period labels are approximate defaults: `in the morning`, `in the afternoon`, `in the evening`, and `at night`.
+Both English variants use `o'clock` for exact hours, `noon` at exactly 12:00, and `midnight` at exactly 00:00. Minute values that are not multiples of five include the word `minute` or `minutes`; five-minute increments omit it. Day-period labels are approximate defaults: `in the morning`, `in the afternoon`, `in the evening`, and `at night`.
 
-Approximate tokens round the minute to the nearest five-minute increment before formatting. Rounding may carry over into the next hour.
+### Approximate formats and aliases
 
-The Turkish tokens `TRTIME` and `APPROXTRTIME`, including their Turkish-language examples, are documented in the **Türkçe** section below.
+All three approximate tokens round the minute to the nearest five-minute increment **before** generating the spoken expression. Rounding can carry over into the next hour. For compatibility, `ENTIME` is an alias for `UKENTIME`, and `APPROXENTIME` is an alias for `APPROXUKENTIME`.
 
 **Credits:** The conversational time-format implementation and Windows x86/x64 GitHub Actions build configuration were prepared with the assistance of **ChatGPT (OpenAI)** in collaboration with **TeraMaister**, who maintains this fork.
 
@@ -184,6 +202,8 @@ T-Clock-ng'nin tüm özgün işlevleri ve Windows 11 uyumluluk iyileştirmeleri 
 
 Bu fork, T-Clock-ng'nin **Clock Text → Format** alanına doğrudan yazılabilen altı gündelik saat biçimi belirteci ekler. Belirteçleri büyük harfle ve **yüzde işareti olmadan** kullanın. Tek başlarına kullanılabildikleri gibi sabit metinlerle ve diğer T-Clock biçim belirteçleriyle birleştirilebilirler.
 
+### Kullanılabilir belirteçler
+
 | Belirteç | Dil / biçim | Hassasiyet |
 |---|---|---|
 | `TRTIME` | Türkçe | Dakikayı aynen korur |
@@ -197,6 +217,8 @@ Bu fork, T-Clock-ng'nin **Clock Text → Format** alanına doğrudan yazılabile
 
 ### Türkçe örnekler
 
+Türkçe belirteçler saati gündelik konuşmadaki 12 saatlik ifadelerle gösterir. Gerektiğinde sabah, öğlen, öğleden sonra, akşam veya gece gibi gün bölümü ifadeleri kullanılır.
+
 | Gerçek saat | `TRTIME` | `APPROXTRTIME` |
 |---|---|---|
 | 13:07 | öğleden sonra biri yedi geçiyor | öğleden sonra biri beş geçiyor |
@@ -205,9 +227,11 @@ Bu fork, T-Clock-ng'nin **Clock Text → Format** alanına doğrudan yazılabile
 | 13:43 | öğleden sonra ikiye on yedi var | öğleden sonra ikiye çeyrek var |
 | 20:30 | akşam sekiz buçuk | akşam sekiz buçuk |
 
-`TRTIME` dakikayı aynen korur. `APPROXTRTIME` önce saati en yakın beş dakikaya yuvarlar; örneğin 13:17, 13:15 olarak gösterilir. Türkçe biçimde tam saatlerde yalnızca saat adı, :30'da `buçuk`, :30'dan önce `geçiyor`, :30'dan sonra ise sonraki saate kalan süreyle `var` kullanılır. Gün bölümleri yaklaşık varsayılanlardır: gece, sabah, öğlen, öğleden sonra ve akşam.
+`TRTIME` dakikayı aynen korur. `APPROXTRTIME` önce saati en yakın beş dakikaya yuvarlar; örneğin 13:17, 13:15 olarak değerlendirilir. Saatin ilk yarısında `geçiyor`, yarımdan sonra sonraki saate kalan süreyi belirten `var`, tam :30'da ise `buçuk` kullanılır. Gün bölümleri yaklaşık varsayılanlardır: gece, sabah, öğlen, öğleden sonra ve akşam.
 
-### İngilizce belirteç örnekleri
+### İngilizce örnekler
+
+İngilizce belirteçler Amerikan ve Britanya İngilizcesindeki gündelik saat ifadelerini üretir. Amerikan İngilizcesi **after / till**, Britanya İngilizcesi ise **past / to** kalıplarını kullanır.
 
 | Gerçek saat | `USENTIME` | `UKENTIME` |
 |---|---|---|
@@ -218,9 +242,11 @@ Bu fork, T-Clock-ng'nin **Clock Text → Format** alanına doğrudan yazılabile
 | 13:45 | quarter till two in the afternoon | quarter to two in the afternoon |
 | 13:55 | five till two in the afternoon | five to two in the afternoon |
 
-Amerikan biçimi **after / till**, Britanya biçimi ise **past / to** ifadelerini kullanır. Her ikisinde de tam saatlerde `o'clock`, tam 12:00'da `noon`, tam 00:00'da `midnight` kullanılır. Beşin katı olmayan dakika değerlerinde `minute` veya `minutes` sözcüğü eklenir; beş dakikalık aralıklarda eklenmez. Gün bölümleri yaklaşık varsayılanlardır: `in the morning`, `in the afternoon`, `in the evening` ve `at night`.
+Her iki İngilizce biçimde de tam saatlerde `o'clock`, tam 12:00'da `noon`, tam 00:00'da `midnight` kullanılır. Beşin katı olmayan dakika değerlerinde `minute` veya `minutes` sözcüğü eklenir; beş dakikalık aralıklarda eklenmez. Gün bölümleri yaklaşık varsayılanlardır: `in the morning`, `in the afternoon`, `in the evening` ve `at night`.
 
-Yaklaşık belirteçler biçimlendirmeden önce dakikayı en yakın beş dakikaya yuvarlar. Yuvarlama bir sonraki saate geçebilir.
+### Yaklaşık biçimler ve takma adlar
+
+Üç yaklaşık belirteç de konuşma ifadesini oluşturmadan **önce** dakikayı en yakın beş dakikaya yuvarlar. Yuvarlama bir sonraki saate geçebilir. Uyumluluk için `ENTIME`, `UKENTIME` ile; `APPROXENTIME` ise `APPROXUKENTIME` ile aynı sonucu veren takma adlardır.
 
 **Katkı:** Gündelik saat biçimi belirteçlerinin uygulanması ve Windows x86/x64 GitHub Actions derleme yapılandırması, bu forkun bakımını üstlenen **TeraMaister** ile iş birliği içinde **ChatGPT (OpenAI)** yardımıyla hazırlanmıştır.
 
