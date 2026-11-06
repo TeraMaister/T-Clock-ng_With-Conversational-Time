@@ -154,6 +154,50 @@ For compatibility, **ENTIME** remains an alias for **UKENTIME**, and **APPROXENT
 
 All original T-Clock-ng functionality and Windows 11 compatibility improvements are retained. This fork focuses on conversational time formatting while keeping the upstream project's development and original features intact.
 
+## Conversational Time Formats
+
+This fork adds six custom format tokens to T-Clock-ng. Enter them directly in the **Clock Text → Format** field, using uppercase letters and **no percent sign**. A token can be used by itself or combined with literal text and other T-Clock format tokens.
+
+| Token | Language / style | Precision |
+|---|---|---|
+| `TRTIME` | Turkish | Exact minute |
+| `APPROXTRTIME` | Turkish | Rounded to nearest five minutes |
+| `UKENTIME` | British English | Exact minute |
+| `APPROXUKENTIME` | British English | Rounded to nearest five minutes |
+| `USENTIME` | American English | Exact minute |
+| `APPROXUSENTIME` | American English | Rounded to nearest five minutes |
+| `ENTIME` | Alias for `UKENTIME` | Exact minute |
+| `APPROXENTIME` | Alias for `APPROXUKENTIME` | Rounded to nearest five minutes |
+
+### Turkish examples
+
+| Actual time | `TRTIME` | `APPROXTRTIME` |
+|---|---|---|
+| 13:07 | öğleden sonra biri yedi geçiyor | öğleden sonra biri beş geçiyor |
+| 13:17 | öğleden sonra biri on yedi geçiyor | öğleden sonra biri çeyrek geçiyor |
+| 13:28 | öğleden sonra biri yirmi sekiz geçiyor | öğleden sonra bir buçuk |
+| 13:43 | öğleden sonra ikiye on yedi var | öğleden sonra ikiye çeyrek var |
+| 20:30 | akşam sekiz buçuk | akşam sekiz buçuk |
+
+`TRTIME` preserves the exact minute. `APPROXTRTIME` rounds to the nearest five minutes first; for example, 13:17 is rounded to 13:15. Turkish phrasing uses the hour alone at :00, `buçuk` at :30, `geçiyor` before :30, and the remaining time to the next hour with `var` after :30. Day periods are practical defaults: gece, sabah, öğlen, öğleden sonra, and akşam.
+
+### English examples
+
+| Actual time | `USENTIME` | `UKENTIME` |
+|---|---|---|
+| 13:05 | five after one in the afternoon | five past one in the afternoon |
+| 13:07 | seven minutes after one in the afternoon | seven minutes past one in the afternoon |
+| 13:15 | quarter after one in the afternoon | quarter past one in the afternoon |
+| 13:30 | half past one in the afternoon | half past one in the afternoon |
+| 13:45 | quarter till two in the afternoon | quarter to two in the afternoon |
+| 13:55 | five till two in the afternoon | five to two in the afternoon |
+
+The American variant uses **after / till**, while the British variant uses **past / to**. Both use `o'clock` for exact hours, `noon` at exactly 12:00, and `midnight` at exactly 00:00. For minute values not divisible by five, the formatter includes `minute` or `minutes`; on five-minute increments it omits that word. Day-period suffixes are practical defaults: `in the morning`, `in the afternoon`, `in the evening`, and `at night`.
+
+The approximate tokens round to the nearest five minutes before formatting. Rounding can advance the hour; for example, a time close to the next hour may be displayed using that next hour.
+
+---
+
 ## Windows 11 Compatibility
 
 First of all, special thanks to [DukeCorp1996](https://dukecorp1996.x35.in/), the developer of [T-Clock-ng](https://github.com/Balls0fSteel/T-Clock-ng), for continuing the development of T-Clock Redux and bringing it up to date with modern Windows versions, current development tools, and ongoing improvements.
