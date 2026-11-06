@@ -1,4 +1,6 @@
-T-Clock-ng
+T-Clock-ng With Conversational Time
+
+
 ==========
 [![build](https://github.com/Balls0fSteel/T-Clock-ng/actions/workflows/build.yml/badge.svg)](https://github.com/Balls0fSteel/T-Clock-ng/actions/workflows/build.yml)
 
