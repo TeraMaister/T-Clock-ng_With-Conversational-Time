@@ -1,5 +1,7 @@
 T-Clock-ng Fork With Conversational Time
 
+* ** Please Support the developer of T-clock-ng:** [donate](https://dukecorp1996.x35.in/donations.html)
+
 ## AI Use and Disclaimer
 
 ### Türkçe
@@ -32,8 +34,8 @@ This fork is maintained separately from the original T-Clock Redux project for p
 [White-Tiger's T-Clock Redux](https://github.com/White-Tiger/T-Clock) (last released 2018) brought up to date for
 **Windows 11**. All credit for T-Clock Redux goes to White-Tiger, and before them to Stoic Joker, Two_toNe and Kazubon.
 
-* **Download:** [latest release](https://github.com/Balls0fSteel/T-Clock-ng/releases/latest)
-* **Website:** [dukecorp1996.x35.in](https://dukecorp1996.x35.in/)
+* **Download Original T-Clock-ng without Conversational Time:** [latest release](https://github.com/Balls0fSteel/T-Clock-ng/releases/latest)
+* **Website of original creator of t-clock-ng:** [dukecorp1996.x35.in](https://dukecorp1996.x35.in/)
 * **Support the development:** [donate](https://dukecorp1996.x35.in/donations.html)
 * **Bugs and feature requests:** [issue tracker](https://github.com/Balls0fSteel/T-Clock-ng/issues)
 
