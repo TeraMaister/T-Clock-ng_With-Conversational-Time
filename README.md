@@ -198,6 +198,50 @@ The approximate tokens round to the nearest five minutes before formatting. Roun
 
 ---
 
+## Türkçe gündelik saat biçimleri
+
+Bu fork, T-Clock-ng'nin **Clock Text → Format** alanına doğrudan yazılabilen altı gündelik saat biçimi belirteci ekler. Belirteçleri büyük harfle ve **yüzde işareti olmadan** kullanın. Tek başlarına kullanılabildikleri gibi sabit metinlerle ve diğer T-Clock biçim belirteçleriyle birleştirilebilirler.
+
+| Belirteç | Dil / biçim | Hassasiyet |
+|---|---|---|
+| `TRTIME` | Türkçe | Dakikayı aynen korur |
+| `APPROXTRTIME` | Türkçe | En yakın beş dakikaya yuvarlar |
+| `UKENTIME` | Britanya İngilizcesi | Dakikayı aynen korur |
+| `APPROXUKENTIME` | Britanya İngilizcesi | En yakın beş dakikaya yuvarlar |
+| `USENTIME` | Amerikan İngilizcesi | Dakikayı aynen korur |
+| `APPROXUSENTIME` | Amerikan İngilizcesi | En yakın beş dakikaya yuvarlar |
+| `ENTIME` | `UKENTIME` takma adı | Dakikayı aynen korur |
+| `APPROXENTIME` | `APPROXUKENTIME` takma adı | En yakın beş dakikaya yuvarlar |
+
+### Türkçe örnekler
+
+| Gerçek saat | `TRTIME` | `APPROXTRTIME` |
+|---|---|---|
+| 13:07 | öğleden sonra biri yedi geçiyor | öğleden sonra biri beş geçiyor |
+| 13:17 | öğleden sonra biri on yedi geçiyor | öğleden sonra biri çeyrek geçiyor |
+| 13:28 | öğleden sonra biri yirmi sekiz geçiyor | öğleden sonra bir buçuk |
+| 13:43 | öğleden sonra ikiye on yedi var | öğleden sonra ikiye çeyrek var |
+| 20:30 | akşam sekiz buçuk | akşam sekiz buçuk |
+
+`TRTIME` dakikayı aynen korur. `APPROXTRTIME` önce saati en yakın beş dakikaya yuvarlar; örneğin 13:17, 13:15 olarak gösterilir. Türkçe biçimde tam saatlerde yalnızca saat adı, :30'da `buçuk`, :30'dan önce `geçiyor`, :30'dan sonra ise sonraki saate kalan süreyle `var` kullanılır. Gün bölümleri yaklaşık varsayılanlardır: gece, sabah, öğlen, öğleden sonra ve akşam.
+
+### İngilizce örnekler
+
+| Gerçek saat | `USENTIME` | `UKENTIME` |
+|---|---|---|
+| 13:05 | five after one in the afternoon | five past one in the afternoon |
+| 13:07 | seven minutes after one in the afternoon | seven minutes past one in the afternoon |
+| 13:15 | quarter after one in the afternoon | quarter past one in the afternoon |
+| 13:30 | half past one in the afternoon | half past one in the afternoon |
+| 13:45 | quarter till two in the afternoon | quarter to two in the afternoon |
+| 13:55 | five till two in the afternoon | five to two in the afternoon |
+
+Amerikan biçimi **after / till**, Britanya biçimi ise **past / to** ifadelerini kullanır. Her ikisinde de tam saatlerde `o'clock`, tam 12:00'da `noon`, tam 00:00'da `midnight` kullanılır. Beşin katı olmayan dakika değerlerinde `minute` veya `minutes` sözcüğü eklenir; beş dakikalık aralıklarda eklenmez. Gün bölümleri yaklaşık varsayılanlardır: `in the morning`, `in the afternoon`, `in the evening` ve `at night`.
+
+Yaklaşık belirteçler biçimlendirmeden önce dakikayı en yakın beş dakikaya yuvarlar. Yuvarlama bir sonraki saate geçebilir.
+
+---
+
 ## Windows 11 Compatibility
 
 First of all, special thanks to [DukeCorp1996](https://dukecorp1996.x35.in/), the developer of [T-Clock-ng](https://github.com/Balls0fSteel/T-Clock-ng), for continuing the development of T-Clock Redux and bringing it up to date with modern Windows versions, current development tools, and ongoing improvements.
