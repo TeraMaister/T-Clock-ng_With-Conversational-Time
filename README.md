@@ -13,6 +13,8 @@ T-Clock-ng
 
 ---
 
+---
+
 ## Purpose
 
 **TL;DR:** This fork adds six conversational time formats to T-Clock-ng: Turkish, British English, and American English, each with an exact and an approximate (nearest-five-minute) variant. Inspired by dual-scale military watch dials, it aims to make the relationship between 24-hour digital time and everyday spoken time more intuitive through continuous exposure.
@@ -241,6 +243,8 @@ If you don't mind to read lots of text, and want to know more about T-Clock and 
 
 ---
 
+---
+
 ## AI Use and Disclaimer
 
 ### Türkçe
@@ -266,4 +270,3 @@ Some code changes and documentation in this project were prepared with the assis
 **Support and contribution requests:** The fork owner is not a professional software developer and has limited programming knowledge. There is no commitment to fix bugs, add features, fulfill custom requests, or provide technical support. Requests may not be fulfilled, and the changes provided in this fork may remain as they are.
 
 This fork is maintained separately from the original T-Clock Redux project for personal use and experimentation.
-
