@@ -39,6 +39,7 @@ automatically sampled background color.
 * **Visual Studio 2017 or newer** with "Desktop development with C++": run `src\compile.bat`
   (or open `src\~ide\msvc-vs.sln`). Output goes to `Release\`.
 * **MinGW-w64 / GCC**: `src/compile.bat` (bash part) with `mingw32-make`, see `src/~ide/Makefile`.
+* **Character encoding:** the conversational-time formatters contain Turkish UTF-8 text. The MSVC and MinGW compiler configurations explicitly select UTF-8 input encoding.
 
 ---
 
