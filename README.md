@@ -2,33 +2,7 @@ T-Clock-ng Fork With Conversational Time
 
 * ** Please Support the developer of T-clock-ng:** [donate dukecorp1996](https://dukecorp1996.x35.in/donations.html)
 
-## AI Use and Disclaimer
-
-### Türkçe
-
-> **DİKKAT: BU FORKTA YAPAY ZEKA KULLANILMIŞTIR.**
-
-Bu projedeki bazı kod değişiklikleri ve dokümantasyon, ChatGPT (OpenAI) yardımıyla hazırlanmıştır.
-
-**Kullanım ve sorumluluk:** Bu yazılımı kendi sorumluluğunuzda kullanırsınız. Yazılımın kullanımından, çalışmamasından, veri kaybından, sistem hatalarından veya doğabilecek diğer doğrudan ya da dolaylı zararlardan fork sahibi sorumlu tutulamaz. Yazılım herhangi bir garanti verilmeksizin, olduğu gibi sunulmaktadır. Kullanmadan önce kaynak kodunu incelemeniz ve önemli verilerinizi yedeklemeniz önerilir.
-
-**Destek ve katkı talepleri:** Fork sahibi profesyonel bir yazılım geliştiricisi değildir ve kodlama bilgisi sınırlıdır. Hata düzeltme, yeni özellik ekleme, özel istekleri yerine getirme veya teknik destek sağlama taahhüdü yoktur. Talepler karşılanamayabilir ve bu fork için sunulan değişiklikler olduğu hâliyle kalabilir.
-
-Bu fork, orijinal T-Clock Redux projesinden ayrı olarak, kişisel kullanım ve deneme amacıyla sürdürülmektedir.
-
-### English
-
-> **NOTICE: THIS FORK USES ARTIFICIAL INTELLIGENCE.**
-
-Some code changes and documentation in this project were prepared with the assistance of ChatGPT (OpenAI).
-
-**Use at your own risk:** You use this software at your own responsibility. The fork owner accepts no responsibility for damages arising from the use of this software, its failure to work, data loss, system errors, or any other direct or indirect consequences. The software is provided "AS IS", without any warranty. You are encouraged to review the source code and back up important data before using it.
-
-**Support and contribution requests:** The fork owner is not a professional software developer and has limited programming knowledge. There is no commitment to fix bugs, add features, fulfill custom requests, or provide technical support. Requests may not be fulfilled, and the changes provided in this fork may remain as they are.
-
-This fork is maintained separately from the original T-Clock Redux project for personal use and experimentation.
-
-
+---
 
 **T-Clock-ng** by [DukeCorp1996](https://dukecorp1996.x35.in/) is a fork of
 [White-Tiger's T-Clock Redux](https://github.com/White-Tiger/T-Clock) (last released 2018) brought up to date for
@@ -41,7 +15,32 @@ This fork is maintained separately from the original T-Clock Redux project for p
 
 ---
 
+<p align="center">
+  <a href="#english">🇬🇧 English</a>
+  &nbsp; | &nbsp;
+  <a href="#türkçe">🇹🇷 Türkçe</a>
+</p>
+
+> GitHub README'de bu bağlantılar düğme gibi görünür ve ilgili dil bölümüne kaydırır.
+
+
+
 ---
+
+<a id="english"></a>
+# English
+
+## AI Use and Disclaimer
+
+> **NOTICE: THIS FORK USES ARTIFICIAL INTELLIGENCE.**
+
+Some code changes and documentation in this project were prepared with the assistance of ChatGPT (OpenAI).
+
+**Use at your own risk:** You use this software at your own responsibility. The fork owner accepts no responsibility for damages arising from the use of this software, its failure to work, data loss, system errors, or any other direct or indirect consequences. The software is provided "AS IS", without any warranty. You are encouraged to review the source code and back up important data before using it.
+
+**Support and contribution requests:** The fork owner is not a professional software developer and has limited programming knowledge. There is no commitment to fix bugs, add features, fulfill custom requests, or provide technical support. Requests may not be fulfilled, and the changes provided in this fork may remain as they are.
+
+This fork is maintained separately from the original T-Clock Redux project for personal use and experimentation.
 
 ## Purpose of adding Conversational Time into t-clock
 
@@ -74,9 +73,113 @@ For compatibility, **ENTIME** remains an alias for **UKENTIME**, and **APPROXENT
 
 All original T-Clock-ng functionality and Windows 11 compatibility improvements are retained. This fork focuses on conversational time formatting while keeping the upstream project's development and original features intact.
 
+## Conversational Time Formats
+
+This fork adds six conversational time-format tokens that can be entered directly in T-Clock-ng's **Clock Text → Format** field. Use the tokens in uppercase and **without a percent sign**. They can be used on their own or combined with static text and other T-Clock format tokens.
+
+| Token | Language / format | Precision |
+|---|---|---|
+| `TRTIME` | Turkish | Exact minute |
+| `APPROXTRTIME` | Turkish | Rounded to nearest five minutes |
+| `UKENTIME` | British English | Exact minute |
+| `APPROXUKENTIME` | British English | Rounded to nearest five minutes |
+| `USENTIME` | American English | Exact minute |
+| `APPROXUSENTIME` | American English | Rounded to nearest five minutes |
+| `ENTIME` | Alias for `UKENTIME` | Exact minute |
+| `APPROXENTIME` | Alias for `APPROXUKENTIME` | Rounded to nearest five minutes |
+
+### English examples
+
+| Actual time | `USENTIME` | `UKENTIME` |
+|---|---|---|
+| 13:05 | five after one in the afternoon | five past one in the afternoon |
+| 13:07 | seven minutes after one in the afternoon | seven minutes past one in the afternoon |
+| 13:15 | quarter after one in the afternoon | quarter past one in the afternoon |
+| 13:30 | half past one in the afternoon | half past one in the afternoon |
+| 13:45 | quarter till two in the afternoon | quarter to two in the afternoon |
+| 13:55 | five till two in the afternoon | five to two in the afternoon |
+
+American English uses **after / till**, while British English uses **past / to**. Both use `o'clock` for exact hours, `noon` at exactly 12:00, and `midnight` at exactly 00:00. Minute values that are not multiples of five include the word `minute` or `minutes`; five-minute increments omit it. Day-period labels are approximate defaults: `in the morning`, `in the afternoon`, `in the evening`, and `at night`.
+
+Approximate tokens round the minute to the nearest five-minute increment before formatting. Rounding may carry over into the next hour.
+
+**Credits:** The conversational time-format implementation and Windows x86/x64 GitHub Actions build configuration were prepared with the assistance of **ChatGPT (OpenAI)** in collaboration with **TeraMaister**, who maintains this fork.
+
+## Windows 11 Compatibility
+
+First of all, special thanks to [DukeCorp1996](https://dukecorp1996.x35.in/), the developer of [T-Clock-ng](https://github.com/Balls0fSteel/T-Clock-ng), for continuing the development of T-Clock Redux and bringing it up to date with modern Windows versions, current development tools, and ongoing improvements.
+
+If you appreciate their work and would like to support the continued development of T-Clock-ng, consider making a donation through their [official donation page](https://dukecorp1996.x35.in/donations.html).
+
+T-Clock-ng introduces an overlay clock for the redesigned Windows 11 taskbar. Since Windows 11 uses a XAML-based taskbar without the classic clock window used by older versions of T-Clock, this approach allows T-Clock-ng to display its own clock over the native clock area while preserving its calendar interaction.
+
+According to the developer's [project roadmap](https://github.com/Balls0fSteel/T-Clock-ng/blob/master/PLAN.md), the overlay can become wider than the original clock area and overlap neighboring system tray icons when using longer clock formats. The suggested workaround is to use a shorter clock format and reduce the default padding.
+
+I will keep an eye on the developer's ongoing work and look forward to seeing what new features and improvements they bring in future releases.
+
+## Recommended Third-Party Tools for restoring traditional Windows interface
+
+Personally, I prefer the traditional Windows interface and would rather not spend time tweaking or working around the redesigned Windows 11 taskbar, Start menu, and context menus. If you feel the same way, or simply want more control over your desktop, consider the following tools.
+
+I recommend these tools to users of **all T-Clock versions and forks**, not just T-Clock-ng.
+
+| Tool | Purpose | License / Pricing |
+|---|---|---|
+| [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher) | Restores and customizes classic Windows taskbar behavior, Start menu, and system tray. | Free · Open Source · GPL-2.0 |
+| [Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu) | Provides a classic Start menu and additional File Explorer features. | Free · Open Source · MIT |
+| [StartAllBack](https://www.startallback.com/) | Provides extensive Windows 11 taskbar, Start menu, system tray, and File Explorer customization. | Paid · Proprietary · Trial available |
+
+These tools are entirely optional. Everyone has their own preferences, workflow, and idea of how their Windows desktop should look and behave. Feel free to use whichever tools suit your needs, combine them, customize your setup, or simply stick with the default Windows interface. There is no single setup that works best for everyone.
+
 ---
 
-## Türkçe gündelik saat biçimleri
+<a id="türkçe"></a>
+# Türkçe
+
+## Yapay Zekâ Kullanımı ve Sorumluluk Reddi
+
+> **DİKKAT: BU FORKTA YAPAY ZEKÂ KULLANILMIŞTIR.**
+
+Bu projedeki bazı kod değişiklikleri ve dokümantasyon, ChatGPT (OpenAI) yardımıyla hazırlanmıştır.
+
+**Kullanım ve sorumluluk:** Bu yazılımı kendi sorumluluğunuzda kullanırsınız. Yazılımın kullanımından, çalışmamasından, veri kaybından, sistem hatalarından veya doğabilecek diğer doğrudan ya da dolaylı zararlardan fork sahibi sorumlu tutulamaz. Yazılım herhangi bir garanti verilmeksizin, olduğu gibi sunulmaktadır. Kullanmadan önce kaynak kodunu incelemeniz ve önemli verilerinizi yedeklemeniz önerilir.
+
+**Destek ve katkı talepleri:** Fork sahibi profesyonel bir yazılım geliştiricisi değildir ve kodlama bilgisi sınırlıdır. Hata düzeltme, yeni özellik ekleme, özel istekleri yerine getirme veya teknik destek sağlama taahhüdü yoktur. Talepler karşılanamayabilir ve bu fork için sunulan değişiklikler olduğu hâliyle kalabilir.
+
+Bu fork, orijinal T-Clock Redux projesinden ayrı olarak, kişisel kullanım ve deneme amacıyla sürdürülmektedir.
+
+## T-Clock'a Gündelik Saat Biçimlerinin Eklenme Amacı
+
+**Kısaca:** Bu fork, T-Clock-ng'ye Türkçe, Britanya İngilizcesi ve Amerikan İngilizcesi için birer kesin ve yaklaşık (en yakın beş dakikaya yuvarlanan) olmak üzere altı gündelik saat biçimi ekler. Askerî saha saatlerinde kullanılan çift ölçekli kadranlardan ilham alarak, 24 saatlik dijital gösterim ile gündelik konuşma dilindeki saat ifadeleri arasındaki ilişkiyi sürekli maruz kalma yoluyla daha sezgisel hâle getirmeyi amaçlar.
+
+Bu fork kişisel bir projeyle başladı.
+
+Ağırlıklı olarak dijital saatlerle büyüdüğüm için 24 saatlik zaman biçimini okumaya alıştım. Ancak özellikle analog saatlerle büyümüş ve geleneksel 12 saatlik ifadeleri daha sık kullanan insanlarla konuşurken, bazen iki biçim arasında zihinsel dönüşüm yapmam gerekiyordu. Dönüşümün kendisi basit olsa da bu hesaplamayı yapmak, karşımdaki kişinin söylediğini işlerken bir veya iki saniyelik küçük bir gecikmeye neden olabiliyor.
+
+Örneğin biri **“altıya çeyrek var”** dediğinde bunu zihnimde **17:45** olarak çevirmem gerekebiliyor. Benzer şekilde, bir futbol maçının **19:00**'da başlayacağını gördüğümde dijital gösterimi hemen anlıyorum; ancak 12 saatlik sistemi kullanan biri bunu daha doğal olarak **“akşam yedi”** şeklinde ifade edebilir.
+
+Bu farkı azaltmak için görev çubuğundaki saatin gündelik konuşma biçiminde de gösterilmesini ve bu ifadelere günlük kullanım yoluyla aşinalık kazanmayı istedim.
+
+Bir diğer ilham kaynağı, bazı Hamilton Khaki Field modelleri gibi askerî tarz saha saatlerinde bulunan çift ölçekli kadranlardı. Bu kadranlar hem geleneksel 1–12 saat ölçeğini hem de karşılık gelen 13–24 askerî saat ölçeğini gösterir. Amaç, saati okurken iki sistem arasında zihinsel hesaplama yapma ihtiyacını azaltmaktır.
+
+Bu fikirden yola çıkarak benzer bir yaklaşımı Windows'un dijital görev çubuğu saatine taşımak istedim: alışılmış 24 saatlik dijital gösterimi korurken aynı saatin gündelik konuşmada nasıl ifade edildiğini de göstermek.
+
+Bu forkun amacı, kullanıcıların hem 12 hem de 24 saatlik gösterimleri ve insanların gündelik hayatta kullandığı doğal saat ifadelerini zamanla içselleştirmesine yardımcı olmaktır. Gündelik saat gösterimini dijital saatin yanında sunarak sayısal saatlerle konuşma dilindeki karşılıklarının tekrar tekrar eşleştirilmesini sağlar.
+
+Bu fork, [T-Clock-ng](https://github.com/Balls0fSteel/T-Clock-ng) projesine altı gündelik saat biçimi ekler:
+
+- **TRTIME:** Türkçe gündelik saat biçimi.
+- **APPROXTRTIME:** En yakın beş dakikaya yuvarlanan Türkçe gündelik saat biçimi.
+- **UKENTIME:** Britanya İngilizcesi gündelik saat biçimi.
+- **APPROXUKENTIME:** En yakın beş dakikaya yuvarlanan Britanya İngilizcesi biçimi.
+- **USENTIME:** Amerikan İngilizcesi gündelik saat biçimi.
+- **APPROXUSENTIME:** En yakın beş dakikaya yuvarlanan Amerikan İngilizcesi biçimi.
+
+Uyumluluk için **ENTIME**, **UKENTIME** belirtecinin; **APPROXENTIME** ise **APPROXUKENTIME** belirtecinin takma adı olarak korunmuştur.
+
+T-Clock-ng'nin tüm özgün işlevleri ve Windows 11 uyumluluk iyileştirmeleri korunur. Bu fork, üst projenin geliştirme sürecine ve özgün özelliklerine dokunmadan gündelik saat biçimlerine odaklanır.
+
+## Türkçe Gündelik Saat Biçimleri
 
 Bu fork, T-Clock-ng'nin **Clock Text → Format** alanına doğrudan yazılabilen altı gündelik saat biçimi belirteci ekler. Belirteçleri büyük harfle ve **yüzde işareti olmadan** kullanın. Tek başlarına kullanılabildikleri gibi sabit metinlerle ve diğer T-Clock biçim belirteçleriyle birleştirilebilirler.
 
@@ -103,7 +206,7 @@ Bu fork, T-Clock-ng'nin **Clock Text → Format** alanına doğrudan yazılabile
 
 `TRTIME` dakikayı aynen korur. `APPROXTRTIME` önce saati en yakın beş dakikaya yuvarlar; örneğin 13:17, 13:15 olarak gösterilir. Türkçe biçimde tam saatlerde yalnızca saat adı, :30'da `buçuk`, :30'dan önce `geçiyor`, :30'dan sonra ise sonraki saate kalan süreyle `var` kullanılır. Gün bölümleri yaklaşık varsayılanlardır: gece, sabah, öğlen, öğleden sonra ve akşam.
 
-### İngilizce örnekler
+### İngilizce belirteç örnekleri
 
 | Gerçek saat | `USENTIME` | `UKENTIME` |
 |---|---|---|
@@ -118,44 +221,36 @@ Amerikan biçimi **after / till**, Britanya biçimi ise **past / to** ifadelerin
 
 Yaklaşık belirteçler biçimlendirmeden önce dakikayı en yakın beş dakikaya yuvarlar. Yuvarlama bir sonraki saate geçebilir.
 
-
 **Katkı:** Gündelik saat biçimi belirteçlerinin uygulanması ve Windows x86/x64 GitHub Actions derleme yapılandırması, bu forkun bakımını üstlenen **TeraMaister** ile iş birliği içinde **ChatGPT (OpenAI)** yardımıyla hazırlanmıştır.
 
----
+## Windows 11 Uyumluluğu
 
----
+Öncelikle, [T-Clock-ng](https://github.com/Balls0fSteel/T-Clock-ng) geliştiricisi [DukeCorp1996](https://dukecorp1996.x35.in/)'e, T-Clock Redux geliştirmesini sürdürdüğü ve projeyi modern Windows sürümlerine, güncel geliştirme araçlarına ve devam eden iyileştirmelere uyarladığı için teşekkür ederim.
 
-## Windows 11 Compatibility
+Çalışmalarını takdir ediyor ve T-Clock-ng'nin gelişimini desteklemek istiyorsanız [resmî bağış sayfasını](https://dukecorp1996.x35.in/donations.html) kullanabilirsiniz.
 
-First of all, special thanks to [DukeCorp1996](https://dukecorp1996.x35.in/), the developer of [T-Clock-ng](https://github.com/Balls0fSteel/T-Clock-ng), for continuing the development of T-Clock Redux and bringing it up to date with modern Windows versions, current development tools, and ongoing improvements.
+T-Clock-ng, yeniden tasarlanan Windows 11 görev çubuğu için bir bindirme saati kullanır. Windows 11, T-Clock'un eski sürümlerde kullandığı klasik saat penceresi yerine XAML tabanlı bir görev çubuğu kullandığından, bu yöntem T-Clock-ng'nin takvim etkileşimini korurken kendi saatini yerel saat alanının üzerinde göstermesini sağlar.
 
-If you appreciate their work and would like to support the continued development of T-Clock-ng, consider making a donation through their [official donation page](https://dukecorp1996.x35.in/donations.html).
+Geliştiricinin [proje yol haritasında](https://github.com/Balls0fSteel/T-Clock-ng/blob/master/PLAN.md) belirtildiği üzere, uzun saat biçimleri kullanıldığında bindirme alanı özgün saat alanından daha geniş olabilir ve sistem tepsisi simgelerinin üzerine taşabilir. Önerilen geçici çözüm, daha kısa bir saat biçimi kullanmak ve varsayılan iç boşluğu azaltmaktır.
 
-T-Clock-ng introduces an overlay clock for the redesigned Windows 11 taskbar. Since Windows 11 uses a XAML-based taskbar without the classic clock window used by older versions of T-Clock, this approach allows T-Clock-ng to display its own clock over the native clock area while preserving its calendar interaction.
+Geliştiricinin çalışmalarını takip etmeye ve gelecekteki sürümlerde sunacağı yeni özellikleri ve iyileştirmeleri görmeye devam edeceğim.
 
-According to the developer's [project roadmap](https://github.com/Balls0fSteel/T-Clock-ng/blob/master/PLAN.md), the overlay can become wider than the original clock area and overlap neighboring system tray icons when using longer clock formats. The suggested workaround is to use a shorter clock format and reduce the default padding.
+## Klasik Windows Arayüzünü Geri Getirmek İçin Önerilen Üçüncü Taraf Araçlar
 
-I will keep an eye on the developer's ongoing work and look forward to seeing what new features and improvements they bring in future releases.
+Ben şahsen klasik Windows arayüzünü tercih ediyorum; yeniden tasarlanan Windows 11 görev çubuğu, Başlat menüsü ve bağlam menüleriyle uğraşarak zaman harcamak istemiyorum. Siz de aynı şekilde düşünüyorsanız veya masaüstünüz üzerinde daha fazla kontrol istiyorsanız aşağıdaki araçlara göz atabilirsiniz.
 
----
+Bu araçları yalnızca T-Clock-ng kullanıcılarına değil, **tüm T-Clock sürümlerinin ve forklarının kullanıcılarına** öneriyorum.
 
-## Recommended Third-Party Tools for restoring traditional Windows interface
-
-Personally, I prefer the traditional Windows interface and would rather not spend time tweaking or working around the redesigned Windows 11 taskbar, Start menu, and context menus. If you feel the same way, or simply want more control over your desktop, consider the following tools.
-
-I recommend these tools to users of **all T-Clock versions and forks**, not just T-Clock-ng.
-
-| Tool | Purpose | License / Pricing |
+| Araç | Amacı | Lisans / Ücret |
 |---|---|---|
-| [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher) | Restores and customizes classic Windows taskbar behavior, Start menu, and system tray. | Free · Open Source · GPL-2.0 |
-| [Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu) | Provides a classic Start menu and additional File Explorer features. | Free · Open Source · MIT |
-| [StartAllBack](https://www.startallback.com/) | Provides extensive Windows 11 taskbar, Start menu, system tray, and File Explorer customization. | Paid · Proprietary · Trial available |
+| [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher) | Klasik Windows görev çubuğu davranışını, Başlat menüsünü ve sistem tepsisini geri getirir ve özelleştirir. | Ücretsiz · Açık kaynak · GPL-2.0 |
+| [Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu) | Klasik Başlat menüsü ve ek Dosya Gezgini özellikleri sunar. | Ücretsiz · Açık kaynak · MIT |
+| [StartAllBack](https://www.startallback.com/) | Windows 11 görev çubuğu, Başlat menüsü, sistem tepsisi ve Dosya Gezgini için kapsamlı özelleştirme sunar. | Ücretli · Tescilli · Deneme sürümü mevcut |
 
-These tools are entirely optional. Everyone has their own preferences, workflow, and idea of how their Windows desktop should look and behave. Feel free to use whichever tools suit your needs, combine them, customize your setup, or simply stick with the default Windows interface. There is no single setup that works best for everyone.
-T-Clock-ng With Conversational Time
+Bu araçlar tamamen isteğe bağlıdır. Herkesin kendi tercihleri, iş akışı ve Windows masaüstünün nasıl görünmesi ve davranması gerektiğine dair farklı bir fikri vardır. İhtiyacınıza uygun araçları kullanabilir, birleştirebilir, kurulumunuzu özelleştirebilir veya varsayılan Windows arayüzünü kullanmaya devam edebilirsiniz. Herkes için en iyi tek bir kurulum yoktur.
 
+---
 
-==========
 Original T-Clock-ng readme
 ==========
 [![build](https://github.com/Balls0fSteel/T-Clock-ng/actions/workflows/build.yml/badge.svg)](https://github.com/Balls0fSteel/T-Clock-ng/actions/workflows/build.yml)
@@ -276,4 +371,3 @@ If you don't mind to read lots of text, and want to know more about T-Clock and 
 ### License
 * GPLv2 ? *(license is currently unknown, needs further research)*
 ~~~~
-
