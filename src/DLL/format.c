@@ -217,7 +217,8 @@ static wchar_t* EnglishTime(wchar_t* out, const SYSTEMTIME* pt, int use_us)
 	else
 		period = L" at night";
 
-	if(pt->wHour != 0 || minute != 0)
+	/* Noon and midnight are self-contained expressions. */
+	if(!((pt->wHour == 0 || pt->wHour == 12) && minute == 0))
 		wcscat(result, period);
 	wcscpy(out, result);
 	return out + wcslen(result);
