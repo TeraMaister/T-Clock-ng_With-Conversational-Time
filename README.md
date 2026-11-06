@@ -21,7 +21,6 @@ T-Clock-ng Fork With Conversational Time
   <a href="#türkçe">🇹🇷 Türkçe</a>
 </p>
 
-> GitHub README'de bu bağlantılar düğme gibi görünür ve ilgili dil bölümüne kaydırır.
 
 
 
