@@ -1,6 +1,6 @@
 T-Clock-ng Fork With Conversational Time
 
-* ** Please Support the developer of T-clock-ng:** [donate](https://dukecorp1996.x35.in/donations.html)
+* ** Please Support the developer of T-clock-ng:** [donate dukecorp1996](https://dukecorp1996.x35.in/donations.html)
 
 ## AI Use and Disclaimer
 
