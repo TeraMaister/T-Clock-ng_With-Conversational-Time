@@ -118,3 +118,73 @@ If you don't mind to read lots of text, and want to know more about T-Clock and 
 ### License
 * GPLv2 ? *(license is currently unknown, needs further research)*
 ~~~~
+
+
+---
+
+## Purpose
+
+**TL;DR:** This fork adds six conversational time formats to T-Clock-ng: Turkish, British English, and American English, each with an exact and an approximate (nearest-five-minute) variant. Inspired by dual-scale military watch dials, it aims to make the relationship between 24-hour digital time and everyday spoken time more intuitive through continuous exposure.
+
+This fork started as a personal project.
+
+Having grown up primarily using digital clocks, I became accustomed to reading time in the 24-hour format. However, when communicating with people who were more accustomed to traditional 12-hour expressions, especially people of my parents' generation who grew up reading time on analog clocks, I sometimes had to mentally convert between the two formats. Even though the conversion itself is simple, having to perform this mental calculation adds a small delay of a second or two when processing what someone says.
+
+For example, when someone says **"quarter to six"**, I may need to mentally translate it into **17:45**. Similarly, when I see a football match advertised as starting at **19:00**, I instinctively understand the digital notation, even though someone using the traditional 12-hour system would more naturally express it as **"seven o'clock in the evening"**.
+
+I wanted to bridge this gap by making my taskbar clock display time in a more conversational way, allowing me to become familiar with these expressions through everyday exposure.
+
+Another inspiration was the dual-scale dial found on military-style field watches, such as certain Hamilton Khaki Field models. These dials display both the traditional 1–12 hour scale and the corresponding 13–24 military time scale. This design aims to reduce the mental effort and time needed to convert between the two systems, eliminating the need for mental arithmetic when reading the time.
+
+Inspired by this idea, I wanted to bring a similar concept to the digital Windows taskbar clock: preserving the familiar 24-hour digital display while also showing how the same time is naturally expressed in everyday speech.
+
+The goal of this fork is to help users gradually internalize both 12-hour and 24-hour time representations, as well as the natural expressions people use when talking about time in everyday life. By displaying conversational time alongside the familiar digital clock, users can repeatedly associate numerical times with their spoken equivalents. Over time, this familiarity can make both time conversion and the recognition of spoken time expressions more instinctive, reducing the need for conscious mental calculations.
+
+This fork extends [T-Clock-ng](https://github.com/Balls0fSteel/T-Clock-ng) with six conversational time formats:
+
+- **TRTIME:** Turkish conversational time.
+- **APPROXTRTIME:** Turkish conversational time, rounded to the nearest five minutes.
+- **UKENTIME:** British English conversational time.
+- **APPROXUKENTIME:** British English conversational time, rounded to the nearest five minutes.
+- **USENTIME:** American English conversational time.
+- **APPROXUSENTIME:** American English conversational time, rounded to the nearest five minutes.
+
+For compatibility, **ENTIME** remains an alias for **UKENTIME**, and **APPROXENTIME** remains an alias for **APPROXUKENTIME**.
+
+All original T-Clock-ng functionality and Windows 11 compatibility improvements are retained. This fork focuses on conversational time formatting while keeping the upstream project's development and original features intact.
+
+## Windows 11 Compatibility
+
+First of all, special thanks to [DukeCorp1996](https://dukecorp1996.x35.in/), the developer of [T-Clock-ng](https://github.com/Balls0fSteel/T-Clock-ng), for continuing the development of T-Clock Redux and bringing it up to date with modern Windows versions, current development tools, and ongoing improvements.
+
+If you appreciate their work and would like to support the continued development of T-Clock-ng, consider making a donation through their [official donation page](https://dukecorp1996.x35.in/donations.html).
+
+T-Clock-ng introduces an overlay clock for the redesigned Windows 11 taskbar. Since Windows 11 uses a XAML-based taskbar without the classic clock window used by older versions of T-Clock, this approach allows T-Clock-ng to display its own clock over the native clock area while preserving its calendar interaction.
+
+According to the developer's [project roadmap](https://github.com/Balls0fSteel/T-Clock-ng/blob/master/PLAN.md), the overlay can become wider than the original clock area and overlap neighboring system tray icons when using longer clock formats. The suggested workaround is to use a shorter clock format and reduce the default padding.
+
+I will keep an eye on the developer's ongoing work and look forward to seeing what new features and improvements they bring in future releases.
+
+## Recommended Third-Party Tools
+
+Personally, I prefer the traditional Windows interface and would rather not spend time tweaking or working around the redesigned Windows 11 taskbar, Start menu, and context menus. If you feel the same way, or simply want more control over your desktop, consider the following tools.
+
+I recommend these tools to users of **all T-Clock versions and forks**, not just T-Clock-ng.
+
+| Tool | Purpose | License / Pricing |
+|---|---|---|
+| [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher) | Restores and customizes classic Windows taskbar behavior, Start menu, and system tray. | Free · Open Source · GPL-2.0 |
+| [Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu) | Provides a classic Start menu and additional File Explorer features. | Free · Open Source · MIT |
+| [StartAllBack](https://www.startallback.com/) | Provides extensive Windows 11 taskbar, Start menu, system tray, and File Explorer customization. | Paid · Proprietary · Trial available |
+
+These tools are entirely optional. Everyone has their own preferences, workflow, and idea of how their Windows desktop should look and behave. Feel free to use whichever tools suit your needs, combine them, customize your setup, or simply stick with the default Windows interface. There is no single setup that works best for everyone.
+
+---
+
+> **AI-use notice:** Some code changes and documentation in this fork were prepared with the assistance of ChatGPT (OpenAI).
+>
+> **Use at your own risk:** This software is provided "AS IS", without warranty of any kind. I accept no responsibility for damages, data loss, system errors, or other consequences arising from its use. Review the source code and back up important data before using it.
+>
+> **Support and contribution requests:** I am not a professional software developer, and I cannot guarantee bug fixes, new features, custom changes, or technical support. Requests may not be fulfilled, and this fork may remain as it is.
+>
+> This fork is maintained separately for personal use and experimentation.
