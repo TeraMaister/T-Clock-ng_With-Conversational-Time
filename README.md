@@ -74,12 +74,12 @@ All original T-Clock-ng functionality and Windows 11 compatibility improvements 
 
 ## Conversational Time Formats
 
-This fork adds six conversational time-format tokens that can be entered directly in T-Clock-ng's **Clock Text → Format** field. Use the tokens in uppercase and **without a percent sign**. They can be used on their own or combined with static text and other T-Clock format tokens.
+This fork adds conversational time-format tokens that can be entered directly in T-Clock-ng's **Clock Text → Format** field. Use the tokens in uppercase and **without a percent sign**. They can be used on their own or combined with static text and other T-Clock format tokens.
+
+The English formats are:
 
 | Token | Language / format | Precision |
 |---|---|---|
-| `TRTIME` | Turkish | Exact minute |
-| `APPROXTRTIME` | Turkish | Rounded to nearest five minutes |
 | `UKENTIME` | British English | Exact minute |
 | `APPROXUKENTIME` | British English | Rounded to nearest five minutes |
 | `USENTIME` | American English | Exact minute |
@@ -101,6 +101,8 @@ This fork adds six conversational time-format tokens that can be entered directl
 American English uses **after / till**, while British English uses **past / to**. Both use `o'clock` for exact hours, `noon` at exactly 12:00, and `midnight` at exactly 00:00. Minute values that are not multiples of five include the word `minute` or `minutes`; five-minute increments omit it. Day-period labels are approximate defaults: `in the morning`, `in the afternoon`, `in the evening`, and `at night`.
 
 Approximate tokens round the minute to the nearest five-minute increment before formatting. Rounding may carry over into the next hour.
+
+The Turkish tokens `TRTIME` and `APPROXTRTIME`, including their Turkish-language examples, are documented in the **Türkçe** section below.
 
 **Credits:** The conversational time-format implementation and Windows x86/x64 GitHub Actions build configuration were prepared with the assistance of **ChatGPT (OpenAI)** in collaboration with **TeraMaister**, who maintains this fork.
 
