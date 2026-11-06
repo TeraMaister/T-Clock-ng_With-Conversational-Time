@@ -196,6 +196,9 @@ The American variant uses **after / till**, while the British variant uses **pas
 
 The approximate tokens round to the nearest five minutes before formatting. Rounding can advance the hour; for example, a time close to the next hour may be displayed using that next hour.
 
+
+**Credits:** The conversational time-format implementations and the Windows x86/x64 GitHub Actions build configuration were prepared with assistance from **ChatGPT (OpenAI)**, in collaboration with **TeraMaister**, who maintains this fork.
+
 ---
 
 ## Türkçe gündelik saat biçimleri
@@ -240,6 +243,9 @@ Amerikan biçimi **after / till**, Britanya biçimi ise **past / to** ifadelerin
 
 Yaklaşık belirteçler biçimlendirmeden önce dakikayı en yakın beş dakikaya yuvarlar. Yuvarlama bir sonraki saate geçebilir.
 
+
+**Katkı:** Gündelik saat biçimi belirteçlerinin uygulanması ve Windows x86/x64 GitHub Actions derleme yapılandırması, bu forkun bakımını üstlenen **TeraMaister** ile iş birliği içinde **ChatGPT (OpenAI)** yardımıyla hazırlanmıştır.
+
 ---
 
 ## Windows 11 Compatibility
@@ -270,10 +276,28 @@ These tools are entirely optional. Everyone has their own preferences, workflow,
 
 ---
 
-> **AI-use notice:** Some code changes and documentation in this fork were prepared with the assistance of ChatGPT (OpenAI).
+> ## ⚠️ DİKKAT: BU FORKTA YAPAY ZEKA KULLANILMIŞTIR.
 >
-> **Use at your own risk:** This software is provided "AS IS", without warranty of any kind. I accept no responsibility for damages, data loss, system errors, or other consequences arising from its use. Review the source code and back up important data before using it.
+> Bu projedeki bazı kod değişiklikleri ve dokümantasyon, ChatGPT (OpenAI) yardımıyla hazırlanmıştır.
 >
-> **Support and contribution requests:** I am not a professional software developer, and I cannot guarantee bug fixes, new features, custom changes, or technical support. Requests may not be fulfilled, and this fork may remain as it is.
+> **Kullanım ve sorumluluk:** Bu yazılımı kendi sorumluluğunuzda kullanırsınız. Yazılımın kullanımından, çalışmamasından, veri kaybından, sistem hatalarından veya doğabilecek diğer doğrudan ya da dolaylı zararlardan fork sahibi sorumlu tutulamaz. Yazılım herhangi bir garanti verilmeksizin, olduğu gibi sunulmaktadır. Kullanmadan önce kaynak kodunu incelemeniz ve önemli verilerinizi yedeklemeniz önerilir.
 >
-> This fork is maintained separately for personal use and experimentation.
+> **Destek ve katkı talepleri:** Fork sahibi profesyonel bir yazılım geliştiricisi değildir ve kodlama bilgisi sınırlıdır. Hata düzeltme, yeni özellik ekleme, özel istekleri yerine getirme veya teknik destek sağlama taahhüdü yoktur. Talepler karşılanamayabilir ve bu fork için sunulan değişiklikler olduğu hâliyle kalabilir.
+>
+> Bu fork, orijinal T-Clock Redux projesinden ayrı olarak, kişisel kullanım ve deneme amacıyla sürdürülmektedir.
+
+---
+
+This fork is maintained separately from the original T-Clock Redux project for personal use and experimentation.
+
+---
+
+> ## ⚠️ NOTICE: THIS FORK USES ARTIFICIAL INTELLIGENCE.
+>
+> Some code changes and documentation in this project were prepared with the assistance of ChatGPT (OpenAI).
+>
+> **Use at your own risk:** You use this software at your own responsibility. The fork owner accepts no responsibility for damages arising from the use of this software, its failure to work, data loss, system errors, or any other direct or indirect consequences. The software is provided "AS IS", without any warranty. You are encouraged to review the source code and back up important data before using it.
+>
+> **Support and contribution requests:** The fork owner is not a professional software developer and has limited programming knowledge. There is no commitment to fix bugs, add features, fulfill custom requests, or provide technical support. Requests may not be fulfilled, and the changes provided in this fork may remain as they are.
+>
+> This fork is maintained separately from the original T-Clock Redux project for personal use and experimentation.
