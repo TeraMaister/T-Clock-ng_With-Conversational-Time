@@ -65,6 +65,178 @@ void InitFormat(const wchar_t* section, SYSTEMTIME* lt)   //--------------------
 		m_AltYear = _wtoi(year);
 }
 
+/* Turkish everyday 12-hour spoken time format (TRTIME). */
+static wchar_t* TurkishTime(wchar_t* out, const SYSTEMTIME* pt)
+{
+	static const wchar_t* hour_nom[12] = {
+		L"on iki", L"bir", L"iki", L"üç", L"dört", L"beş",
+		L"altı", L"yedi", L"sekiz", L"dokuz", L"on", L"on bir"
+	};
+	static const wchar_t* hour_acc[12] = {
+		L"on ikiyi", L"biri", L"ikiyi", L"üçü", L"dördü", L"beşi",
+		L"altıyı", L"yediyi", L"sekizi", L"dokuzu", L"onu", L"on biri"
+	};
+	static const wchar_t* hour_dat[12] = {
+		L"on ikiye", L"bire", L"ikiye", L"üçe", L"dörde", L"beşe",
+		L"altıya", L"yediye", L"sekize", L"dokuza", L"ona", L"on bire"
+	};
+	static const wchar_t* number[30] = {
+		L"", L"bir", L"iki", L"üç", L"dört", L"beş", L"altı", L"yedi",
+		L"sekiz", L"dokuz", L"on", L"on bir", L"on iki", L"on üç",
+		L"on dört", L"on beş", L"on altı", L"on yedi", L"on sekiz",
+		L"on dokuz", L"yirmi", L"yirmi bir", L"yirmi iki", L"yirmi üç",
+		L"yirmi dört", L"yirmi beş", L"yirmi altı", L"yirmi yedi",
+		L"yirmi sekiz", L"yirmi dokuz"
+	};
+	wchar_t result[80];
+	int hour = pt->wHour % 12;
+	int minute = pt->wMinute;
+
+	result[0] = L'\0';
+
+	/* Use natural Turkish day-period expressions. */
+	if(pt->wHour <= 4)
+		wcscat(result, L"gece ");
+	else if(pt->wHour <= 11)
+		wcscat(result, L"sabah ");
+	else if(pt->wHour == 12)
+		wcscat(result, L"öğlen ");
+	else if(pt->wHour <= 17)
+		wcscat(result, L"öğleden sonra ");
+	else if(pt->wHour <= 20)
+		wcscat(result, L"akşam ");
+	else
+		wcscat(result, L"gece ");
+
+	if(minute == 0) {
+		wcscat(result, hour_nom[hour]);
+	} else if(minute < 30) {
+		wcscat(result, hour_acc[hour]);
+		wcscat(result, L" ");
+		if(minute == 15)
+			wcscat(result, L"çeyrek");
+		else
+			wcscat(result, number[minute]);
+		wcscat(result, L" geçiyor");
+	} else if(minute == 30) {
+		wcscat(result, hour_nom[hour]);
+		wcscat(result, L" buçuk");
+	} else {
+		wcscat(result, hour_dat[(hour + 1) % 12]);
+		wcscat(result, L" ");
+		if(minute == 45)
+			wcscat(result, L"çeyrek");
+		else
+			wcscat(result, number[60 - minute]);
+		wcscat(result, L" var");
+	}
+
+	wcscpy(out, result);
+	return out + wcslen(result);
+}
+
+
+/* Turkish approximate spoken time, rounded to the nearest five minutes. */
+static wchar_t* ApproximateTurkishTime(wchar_t* out, const SYSTEMTIME* pt)
+{
+	SYSTEMTIME rounded = *pt;
+	int minute = ((int)pt->wMinute + 2) / 5 * 5;
+
+	if(minute >= 60) {
+		minute = 0;
+		rounded.wHour = (WORD)((rounded.wHour + 1) % 24);
+	}
+	rounded.wMinute = (WORD)minute;
+	return TurkishTime(out, &rounded);
+}
+
+/* English conversational time. use_us selects American (after/till) or British (past/to) wording. */
+static wchar_t* EnglishTime(wchar_t* out, const SYSTEMTIME* pt, int use_us)
+{
+	static const wchar_t* hour_name[12] = {
+		L"twelve", L"one", L"two", L"three", L"four", L"five",
+		L"six", L"seven", L"eight", L"nine", L"ten", L"eleven"
+	};
+	static const wchar_t* number[30] = {
+		L"", L"one", L"two", L"three", L"four", L"five", L"six",
+		L"seven", L"eight", L"nine", L"ten", L"eleven", L"twelve",
+		L"thirteen", L"fourteen", L"fifteen", L"sixteen", L"seventeen",
+		L"eighteen", L"nineteen", L"twenty", L"twenty-one",
+		L"twenty-two", L"twenty-three", L"twenty-four", L"twenty-five",
+		L"twenty-six", L"twenty-seven", L"twenty-eight", L"twenty-nine"
+	};
+	wchar_t result[128];
+	int hour = pt->wHour % 12;
+	int minute = pt->wMinute;
+	const wchar_t* period;
+	const wchar_t* past_word = use_us ? L" after " : L" past ";
+	const wchar_t* to_word = use_us ? L" till " : L" to ";
+
+	result[0] = L'\0';
+	if(pt->wHour == 0 && minute == 0) {
+		wcscpy(result, L"midnight");
+	} else if(pt->wHour == 12 && minute == 0) {
+		wcscpy(result, L"noon");
+	} else if(minute == 0) {
+		wcscat(result, hour_name[hour]);
+		wcscat(result, L" o'clock");
+	} else if(minute == 15) {
+		wcscat(result, L"quarter");
+		wcscat(result, past_word);
+		wcscat(result, hour_name[hour]);
+	} else if(minute == 30) {
+		wcscat(result, L"half past ");
+		wcscat(result, hour_name[hour]);
+	} else if(minute == 45) {
+		wcscat(result, L"quarter");
+		wcscat(result, to_word);
+		wcscat(result, hour_name[(hour + 1) % 12]);
+	} else if(minute < 30) {
+		wcscat(result, number[minute]);
+		if(minute % 5 != 0)
+			wcscat(result, minute == 1 ? L" minute" : L" minutes");
+		wcscat(result, past_word);
+		wcscat(result, hour_name[hour]);
+	} else {
+		int remaining = 60 - minute;
+		wcscat(result, number[remaining]);
+		if(remaining % 5 != 0)
+			wcscat(result, remaining == 1 ? L" minute" : L" minutes");
+		wcscat(result, to_word);
+		wcscat(result, hour_name[(hour + 1) % 12]);
+	}
+
+	if(pt->wHour < 5)
+		period = L" at night";
+	else if(pt->wHour < 12)
+		period = L" in the morning";
+	else if(pt->wHour < 18)
+		period = L" in the afternoon";
+	else if(pt->wHour < 21)
+		period = L" in the evening";
+	else
+		period = L" at night";
+
+	if(pt->wHour != 0 || minute != 0)
+		wcscat(result, period);
+	wcscpy(out, result);
+	return out + wcslen(result);
+}
+
+/* English approximate spoken time, rounded to the nearest five minutes. */
+static wchar_t* ApproximateEnglishTime(wchar_t* out, const SYSTEMTIME* pt, int use_us)
+{
+	SYSTEMTIME rounded = *pt;
+	int minute = ((int)pt->wMinute + 2) / 5 * 5;
+
+	if(minute >= 60) {
+		minute = 0;
+		rounded.wHour = (WORD)((rounded.wHour + 1) % 24);
+	}
+	rounded.wMinute = (WORD)minute;
+	return EnglishTime(out, &rounded, use_us);
+}
+
 __pragma(warning(push))
 __pragma(warning(disable:4701)) // MSVC is confused with our S(..) format (uptime) about "num" being "uninitialized"
 //================================================================================================
@@ -282,6 +454,41 @@ unsigned MakeFormat(wchar_t buf[FORMAT_MAX_SIZE], const wchar_t* fmt, SYSTEMTIME
 			while(*fmt == 'g') fmt++;
 		}
 		
+		
+		/* Conversational time formats added by this fork. Check the longest
+		   tokens first so APPROXENTIME remains a compatibility alias. */
+		else if(*fmt == 'A' && wcsncmp(fmt, L"APPROXUSENTIME", 14) == 0) {
+			out = ApproximateEnglishTime(out, pt, 1);
+			fmt += 14;
+		}
+		else if(*fmt == 'A' && wcsncmp(fmt, L"APPROXUKENTIME", 14) == 0) {
+			out = ApproximateEnglishTime(out, pt, 0);
+			fmt += 14;
+		}
+		else if(*fmt == 'A' && wcsncmp(fmt, L"APPROXTRTIME", 12) == 0) {
+			out = ApproximateTurkishTime(out, pt);
+			fmt += 12;
+		}
+		else if(*fmt == 'A' && wcsncmp(fmt, L"APPROXENTIME", 12) == 0) {
+			out = ApproximateEnglishTime(out, pt, 0);
+			fmt += 12;
+		}
+		else if(*fmt == 'T' && wcsncmp(fmt, L"TRTIME", 6) == 0) {
+			out = TurkishTime(out, pt);
+			fmt += 6;
+		}
+		else if(*fmt == 'U' && wcsncmp(fmt, L"USENTIME", 8) == 0) {
+			out = EnglishTime(out, pt, 1);
+			fmt += 8;
+		}
+		else if(*fmt == 'U' && wcsncmp(fmt, L"UKENTIME", 8) == 0) {
+			out = EnglishTime(out, pt, 0);
+			fmt += 8;
+		}
+		else if(*fmt == 'E' && wcsncmp(fmt, L"ENTIME", 6) == 0) {
+			out = EnglishTime(out, pt, 0);
+			fmt += 6;
+		}
 		else if(*fmt == 'L' && wcsncmp(fmt, L"LDATE", 5) == 0) {
 			GetDateFormat(LOCALE_USER_DEFAULT,
 						  DATE_LONGDATE, pt, NULL, out, (int)(bufend-out));
